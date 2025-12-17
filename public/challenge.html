@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Node.js Challenge - Dog Breeds Library</title>
+  <link rel="stylesheet" href="/css/challenge.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h1>🐕 Node.js Challenge</h1>
+        <p class="subtitle">Dog Breeds Library</p>
+      </div>
+
+      <nav class="challenge-nav">
+        <ul>
+          <li>
+            <button class="nav-btn active" data-challenge="intro">
+              <span class="nav-icon">📖</span>
+              <span class="nav-text">Introduction</span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-btn" data-challenge="a">
+              <span class="nav-icon">🅰️</span>
+              <span class="nav-text">Challenge A - Classes</span>
+              <span class="status-badge" id="status-a"></span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-btn" data-challenge="b">
+              <span class="nav-icon">🅱️</span>
+              <span class="nav-text">Challenge B - Modules</span>
+              <span class="status-badge" id="status-b"></span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-btn" data-challenge="c">
+              <span class="nav-icon">🇨</span>
+              <span class="nav-text">Challenge C - Promises</span>
+              <span class="status-badge" id="status-c"></span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-btn" data-challenge="d">
+              <span class="nav-icon">🇩</span>
+              <span class="nav-text">Challenge D - Async/Await</span>
+              <span class="status-badge" id="status-d"></span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-btn" data-challenge="e">
+              <span class="nav-icon">🇪</span>
+              <span class="nav-text">Challenge E - Requests</span>
+              <span class="status-badge" id="status-e"></span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-btn" data-challenge="f">
+              <span class="nav-icon">🇫</span>
+              <span class="nav-text">Challenge F - Error Handling</span>
+              <span class="status-badge" id="status-f"></span>
+            </button>
+          </li>
+          <li>
+            <button class="nav-btn" data-challenge="g">
+              <span class="nav-icon">🇬</span>
+              <span class="nav-text">Challenge G - Final Project</span>
+              <span class="status-badge" id="status-g"></span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="progress-container">
+          <div class="progress-label">
+            <span>Progress</span>
+            <span id="progress-text">0/7</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+          </div>
+        </div>
+        <a href="/index.html" class="preview-link" target="_blank">
+          🌐 Preview App
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Introduction -->
+      <section class="challenge-section active" id="section-intro">
+        <div class="section-header">
+          <h2>Welcome to the Node.js Challenge!</h2>
+        </div>
+        <div class="section-content">
+          <div class="intro-card">
+            <h3>🎯 What You'll Build</h3>
+            <p>A <strong>Dog Breeds Library</strong> web application that displays dog breeds from an external API. You'll implement both the backend (Express.js) and frontend (vanilla JS).</p>
+          </div>
+
+          <div class="intro-card">
+            <h3>📚 Skills Covered</h3>
+            <ul class="skills-list">
+              <li>ES6 Classes</li>
+              <li>ES Modules (import/export)</li>
+              <li>Promises</li>
+              <li>Async/Await</li>
+              <li>Fetch API</li>
+              <li>Error Handling</li>
+              <li>Express.js</li>
+            </ul>
+          </div>
+
+          <div class="intro-card">
+            <h3>🚀 Getting Started</h3>
+            <ol class="steps-list">
+              <li>Make sure you've run <code>npm install</code></li>
+              <li>Open the project in your code editor</li>
+              <li>Complete each challenge in order (A → G)</li>
+              <li>Click <strong>"Validate"</strong> to test your code</li>
+              <li>All tests must pass before moving on</li>
+            </ol>
+          </div>
+
+          <div class="intro-card">
+            <h3>📁 Project Structure</h3>
+            <pre class="code-block">src/
+├── classes/DogBreed.js    ← Challenge A & B
+├── services/dogService.js ← Challenge E
+├── utils/
+│   ├── wait.js            ← Challenge C & D
+│   └── validators.js      ← Challenge F
+server.js                  ← Challenge G
+public/js/                 ← Challenge G</pre>
+          </div>
+
+          <div class="action-area">
+            <button class="btn btn-primary btn-large" onclick="navigateTo('a')">
+              Start Challenge A →
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Challenge A -->
+      <section class="challenge-section" id="section-a">
+        <div class="section-header">
+          <h2>Challenge A - Classes</h2>
+          <span class="badge">src/classes/DogBreed.js</span>
+        </div>
+        <div class="section-content">
+          <div class="objective-card">
+            <h3>🎯 Objective</h3>
+            <p>Create a <code>DogBreed</code> class that represents a dog breed with its attributes and methods.</p>
+          </div>
+
+          <div class="task-card">
+            <h3>📋 Requirements</h3>
+
+            <h4>Properties</h4>
+            <ul>
+              <li><code>id</code> - string (unique identifier)</li>
+              <li><code>name</code> - string (breed name)</li>
+              <li><code>description</code> - string</li>
+              <li><code>hypoallergenic</code> - boolean</li>
+              <li><code>life</code> - object <code>{ min, max }</code></li>
+              <li><code>maleWeight</code> - object <code>{ min, max }</code></li>
+              <li><code>femaleWeight</code> - object <code>{ min, max }</code></li>
+            </ul>
+
+            <h4>Methods</h4>
+            <ul>
+              <li><code>getLifeSpan()</code> → returns <code>"10-14 years"</code></li>
+              <li><code>getMaleWeight()</code> → returns <code>"25-35 kg"</code></li>
+              <li><code>getFemaleWeight()</code> → returns <code>"20-30 kg"</code></li>
+              <li><code>isHypoallergenic()</code> → returns <code>"Yes"</code> or <code>"No"</code></li>
+              <li><code>describe()</code> → returns full description string</li>
+            </ul>
+
+            <h4>Static Method</h4>
+            <ul>
+              <li><code>fromApiResponse(apiData)</code> → creates instance from API format</li>
+            </ul>
+          </div>
+
+          <div class="hint-card">
+            <h3>💡 Hints</h3>
+            <ul>
+              <li>The API uses <code>snake_case</code> (e.g., <code>male_weight</code>) but your class should use <code>camelCase</code></li>
+              <li>The <code>fromApiResponse()</code> static method should transform API data to constructor format</li>
+              <li>Check the TODO comments in the file for detailed guidance</li>
+            </ul>
+          </div>
+
+          <div class="example-card">
+            <h3>📝 Example Usage</h3>
+            <pre class="code-block">const breed = new DogBreed({
+  id: 'abc-123',
+  name: 'Labrador',
+  description: 'Friendly dog',
+  hypoallergenic: false,
+  life: { min: 10, max: 14 },
+  maleWeight: { min: 29, max: 36 },
+  femaleWeight: { min: 25, max: 32 }
+});
+
+console.log(breed.getLifeSpan()); // "10-14 years"
+console.log(breed.isHypoallergenic()); // "No"</pre>
+          </div>
+
+          <div class="validate-area">
+            <button class="btn btn-validate" onclick="runTests('a')">
+              <span class="btn-icon">🧪</span>
+              Validate Challenge A
+            </button>
+            <div class="test-results" id="results-a"></div>
+          </div>
+
+          <div class="navigation-buttons">
+            <button class="btn btn-secondary" onclick="navigateTo('intro')">← Introduction</button>
+            <button class="btn btn-primary" onclick="navigateTo('b')">Challenge B →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Challenge B -->
+      <section class="challenge-section" id="section-b">
+        <div class="section-header">
+          <h2>Challenge B - Modules</h2>
+          <span class="badge">All src/ files</span>
+        </div>
+        <div class="section-content">
+          <div class="objective-card">
+            <h3>🎯 Objective</h3>
+            <p>Ensure proper ES Module structure with correct exports and imports throughout the project.</p>
+          </div>
+
+          <div class="task-card">
+            <h3>📋 Requirements</h3>
+
+            <h4>File Structure</h4>
+            <ul>
+              <li><code>src/classes/DogBreed.js</code> - default export</li>
+              <li><code>src/services/dogService.js</code> - named exports</li>
+              <li><code>src/utils/wait.js</code> - named exports</li>
+              <li><code>src/utils/validators.js</code> - named exports</li>
+              <li><code>src/index.js</code> - re-exports everything</li>
+            </ul>
+
+            <h4>Export Examples</h4>
+            <pre class="code-block">// Default export (classes)
+export default DogBreed;
+
+// Named exports (functions)
+export function fetchBreeds() { ... }
+export { fetchBreeds, fetchBreedById };</pre>
+          </div>
+
+          <div class="hint-card">
+            <h3>💡 Hints</h3>
+            <ul>
+              <li>Use <code>export default</code> for classes</li>
+              <li>Use <code>export function</code> or <code>export { name }</code> for functions</li>
+              <li>The tests check that exports exist and are the correct type</li>
+            </ul>
+          </div>
+
+          <div class="validate-area">
+            <button class="btn btn-validate" onclick="runTests('b')">
+              <span class="btn-icon">🧪</span>
+              Validate Challenge B
+            </button>
+            <div class="test-results" id="results-b"></div>
+          </div>
+
+          <div class="navigation-buttons">
+            <button class="btn btn-secondary" onclick="navigateTo('a')">← Challenge A</button>
+            <button class="btn btn-primary" onclick="navigateTo('c')">Challenge C →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Challenge C -->
+      <section class="challenge-section" id="section-c">
+        <div class="section-header">
+          <h2>Challenge C - Promises</h2>
+          <span class="badge">src/utils/wait.js</span>
+        </div>
+        <div class="section-content">
+          <div class="objective-card">
+            <h3>🎯 Objective</h3>
+            <p>Create a <code>wait(ms)</code> function that returns a Promise which resolves after the specified milliseconds.</p>
+          </div>
+
+          <div class="task-card">
+            <h3>📋 Requirements</h3>
+            <ul>
+              <li>Function takes <code>ms</code> (milliseconds) as parameter</li>
+              <li>Returns a <code>Promise</code></li>
+              <li>Promise resolves (not rejects) after <code>ms</code> milliseconds</li>
+              <li>Uses <code>setTimeout</code> internally</li>
+            </ul>
+          </div>
+
+          <div class="example-card">
+            <h3>📝 Example Usage</h3>
+            <pre class="code-block">// With .then()
+wait(1000).then(() => {
+  console.log('1 second passed!');
+});
+
+// With await
+await wait(2000);
+console.log('2 seconds passed!');</pre>
+          </div>
+
+          <div class="hint-card">
+            <h3>💡 Hints</h3>
+            <pre class="code-block">function wait(ms) {
+  return new Promise((resolve) => {
+    // Use setTimeout here...
+  });
+}</pre>
+          </div>
+
+          <div class="validate-area">
+            <button class="btn btn-validate" onclick="runTests('c')">
+              <span class="btn-icon">🧪</span>
+              Validate Challenge C
+            </button>
+            <div class="test-results" id="results-c"></div>
+          </div>
+
+          <div class="navigation-buttons">
+            <button class="btn btn-secondary" onclick="navigateTo('b')">← Challenge B</button>
+            <button class="btn btn-primary" onclick="navigateTo('d')">Challenge D →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Challenge D -->
+      <section class="challenge-section" id="section-d">
+        <div class="section-header">
+          <h2>Challenge D - Async/Await</h2>
+          <span class="badge">src/utils/wait.js</span>
+        </div>
+        <div class="section-content">
+          <div class="objective-card">
+            <h3>🎯 Objective</h3>
+            <p>Create a <code>delayedAction(ms)</code> async function that demonstrates using <code>await</code> with your <code>wait()</code> function.</p>
+          </div>
+
+          <div class="task-card">
+            <h3>📋 Requirements</h3>
+            <p>The function should:</p>
+            <ol>
+              <li>Log <code>"Starting..."</code> to console</li>
+              <li>Wait for <code>ms</code> milliseconds using <code>await wait(ms)</code></li>
+              <li>Log <code>"Done!"</code> to console</li>
+              <li>Return the <code>ms</code> value</li>
+            </ol>
+          </div>
+
+          <div class="example-card">
+            <h3>📝 Example Usage</h3>
+            <pre class="code-block">const result = await delayedAction(2000);
+// Console: "Starting..."
+// (2 seconds pass)
+// Console: "Done!"
+console.log(result); // 2000</pre>
+          </div>
+
+          <div class="bonus-card">
+            <h3>⭐ Bonus Challenge</h3>
+            <p>Implement <code>retryWithDelay(asyncFn, maxRetries, delayMs)</code> that:</p>
+            <ul>
+              <li>Tries to execute <code>asyncFn</code></li>
+              <li>If it fails, waits <code>delayMs</code> then retries</li>
+              <li>Repeats up to <code>maxRetries</code> times</li>
+              <li>Throws the last error if all retries fail</li>
+            </ul>
+          </div>
+
+          <div class="validate-area">
+            <button class="btn btn-validate" onclick="runTests('d')">
+              <span class="btn-icon">🧪</span>
+              Validate Challenge D
+            </button>
+            <div class="test-results" id="results-d"></div>
+          </div>
+
+          <div class="navigation-buttons">
+            <button class="btn btn-secondary" onclick="navigateTo('c')">← Challenge C</button>
+            <button class="btn btn-primary" onclick="navigateTo('e')">Challenge E →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Challenge E -->
+      <section class="challenge-section" id="section-e">
+        <div class="section-header">
+          <h2>Challenge E - HTTP Requests</h2>
+          <span class="badge">src/services/dogService.js</span>
+        </div>
+        <div class="section-content">
+          <div class="objective-card">
+            <h3>🎯 Objective</h3>
+            <p>Implement API functions to fetch dog data from <code>https://dogapi.dog/api/v2</code></p>
+          </div>
+
+          <div class="task-card">
+            <h3>📋 Functions to Implement</h3>
+
+            <h4><code>fetchBreeds()</code></h4>
+            <ul>
+              <li>GET <code>/breeds</code></li>
+              <li>Returns array of breed objects</li>
+              <li>Throws <code>"Failed to fetch breeds"</code> on error</li>
+            </ul>
+
+            <h4><code>fetchBreedById(id)</code></h4>
+            <ul>
+              <li>GET <code>/breeds/:id</code></li>
+              <li>Returns single breed object</li>
+              <li>Throws <code>"Breed not found"</code> on 404</li>
+              <li>Throws <code>"Failed to fetch breed"</code> on other errors</li>
+            </ul>
+
+            <h4><code>fetchFacts(limit = 1)</code></h4>
+            <ul>
+              <li>GET <code>/facts?limit=N</code></li>
+              <li>Returns array of fact objects</li>
+              <li>Throws <code>"Failed to fetch facts"</code> on error</li>
+            </ul>
+          </div>
+
+          <div class="example-card">
+            <h3>📝 Example Implementation</h3>
+            <pre class="code-block">export async function fetchBreeds() {
+  const response = await fetch(API_BASE_URL + '/breeds');
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch breeds');
+  }
+
+  const json = await response.json();
+  return json.data;
+}</pre>
+          </div>
+
+          <div class="hint-card">
+            <h3>💡 API Response Format</h3>
+            <pre class="code-block">{
+  "data": [
+    {
+      "id": "uuid-here",
+      "type": "breed",
+      "attributes": {
+        "name": "Labrador",
+        "description": "...",
+        ...
+      }
+    }
+  ]
+}</pre>
+          </div>
+
+          <div class="validate-area">
+            <button class="btn btn-validate" onclick="runTests('e')">
+              <span class="btn-icon">🧪</span>
+              Validate Challenge E
+            </button>
+            <div class="test-results" id="results-e"></div>
+          </div>
+
+          <div class="navigation-buttons">
+            <button class="btn btn-secondary" onclick="navigateTo('d')">← Challenge D</button>
+            <button class="btn btn-primary" onclick="navigateTo('f')">Challenge F →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Challenge F -->
+      <section class="challenge-section" id="section-f">
+        <div class="section-header">
+          <h2>Challenge F - Error Handling</h2>
+          <span class="badge">src/utils/validators.js</span>
+        </div>
+        <div class="section-content">
+          <div class="objective-card">
+            <h3>🎯 Objective</h3>
+            <p>Implement validation functions that properly throw descriptive errors when validation fails.</p>
+          </div>
+
+          <div class="task-card">
+            <h3>📋 Functions to Implement</h3>
+
+            <h4><code>validateBreedId(id)</code></h4>
+            <table class="error-table">
+              <tr><th>Condition</th><th>Error Message</th></tr>
+              <tr><td>null/undefined/empty</td><td><code>"Breed ID is required"</code></td></tr>
+              <tr><td>not a string</td><td><code>"Breed ID must be a string"</code></td></tr>
+              <tr><td>not UUID format</td><td><code>"Invalid breed ID format"</code></td></tr>
+            </table>
+
+            <h4><code>validateLimit(limit, maxLimit = 5)</code></h4>
+            <table class="error-table">
+              <tr><th>Condition</th><th>Error Message</th></tr>
+              <tr><td>not a number/NaN</td><td><code>"Limit must be a number"</code></td></tr>
+              <tr><td>out of range</td><td><code>"Limit must be between 1 and {maxLimit}"</code></td></tr>
+            </table>
+
+            <h4><code>safeExecute(asyncFn)</code></h4>
+            <ul>
+              <li>Success: <code>{ success: true, data: result }</code></li>
+              <li>Failure: <code>{ success: false, error: message }</code></li>
+            </ul>
+
+            <h4><code>validateBreedData(data)</code></h4>
+            <table class="error-table">
+              <tr><th>Condition</th><th>Error Message</th></tr>
+              <tr><td>null/undefined</td><td><code>"Breed data is required"</code></td></tr>
+              <tr><td>not an object</td><td><code>"Breed data must be an object"</code></td></tr>
+              <tr><td>missing name</td><td><code>"Breed name is required"</code></td></tr>
+            </table>
+          </div>
+
+          <div class="hint-card">
+            <h3>💡 UUID Regex</h3>
+            <pre class="code-block">const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;</pre>
+          </div>
+
+          <div class="validate-area">
+            <button class="btn btn-validate" onclick="runTests('f')">
+              <span class="btn-icon">🧪</span>
+              Validate Challenge F
+            </button>
+            <div class="test-results" id="results-f"></div>
+          </div>
+
+          <div class="navigation-buttons">
+            <button class="btn btn-secondary" onclick="navigateTo('e')">← Challenge E</button>
+            <button class="btn btn-primary" onclick="navigateTo('g')">Challenge G →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Challenge G -->
+      <section class="challenge-section" id="section-g">
+        <div class="section-header">
+          <h2>Challenge G - Final Project</h2>
+          <span class="badge">server.js + public/js/*</span>
+        </div>
+        <div class="section-content">
+          <div class="objective-card">
+            <h3>🎯 Objective</h3>
+            <p>Wire everything together! Implement the Express server API endpoints and frontend JavaScript to create a working Dog Breeds Library app.</p>
+          </div>
+
+          <div class="task-card">
+            <h3>📋 Part 1: Server (server.js)</h3>
+            <p>Implement these API proxy endpoints:</p>
+
+            <h4><code>GET /api/breeds</code></h4>
+            <p>Fetch from Dog API and return breeds</p>
+
+            <h4><code>GET /api/breeds/:id</code></h4>
+            <p>Fetch single breed, handle 404</p>
+
+            <h4><code>GET /api/facts</code></h4>
+            <p>Fetch random facts with optional limit query param</p>
+          </div>
+
+          <div class="task-card">
+            <h3>📋 Part 2: Main Page (public/js/main.js)</h3>
+            <ul>
+              <li><code>fetchBreeds()</code> - fetch from <code>/api/breeds</code></li>
+              <li><code>fetchRandomFact()</code> - fetch from <code>/api/facts</code></li>
+              <li><code>renderBreeds()</code> - populate the table</li>
+              <li><code>loadBreeds()</code> - orchestrate loading with error handling</li>
+              <li><code>init()</code> - initialize the page</li>
+            </ul>
+          </div>
+
+          <div class="task-card">
+            <h3>📋 Part 3: Breed Page (public/js/breed.js)</h3>
+            <ul>
+              <li><code>getBreedIdFromUrl()</code> - parse URL params</li>
+              <li><code>validateBreedId(id)</code> - validate format</li>
+              <li><code>fetchBreedDetails(id)</code> - fetch from <code>/api/breeds/:id</code></li>
+              <li><code>renderBreedDetails(breed)</code> - update the DOM</li>
+              <li><code>loadBreedDetails()</code> - orchestrate with error handling</li>
+            </ul>
+          </div>
+
+          <div class="hint-card">
+            <h3>💡 Testing the App</h3>
+            <ol>
+              <li>Run <code>npm run dev</code> to start the server</li>
+              <li>Click "Preview App" in the sidebar</li>
+              <li>The breeds table should populate</li>
+              <li>Clicking "View Details" should show breed info</li>
+            </ol>
+          </div>
+
+          <div class="validate-area">
+            <button class="btn btn-validate" onclick="runTests('g')">
+              <span class="btn-icon">🧪</span>
+              Validate Challenge G
+            </button>
+            <div class="test-results" id="results-g"></div>
+          </div>
+
+          <div class="completion-card hidden" id="completion-card">
+            <h3>🎉 Congratulations!</h3>
+            <p>You've completed all challenges! You now have a working Dog Breeds Library built with:</p>
+            <ul>
+              <li>✅ ES6 Classes</li>
+              <li>✅ ES Modules</li>
+              <li>✅ Promises</li>
+              <li>✅ Async/Await</li>
+              <li>✅ Fetch API</li>
+              <li>✅ Error Handling</li>
+              <li>✅ Express.js</li>
+            </ul>
+            <a href="/index.html" class="btn btn-primary btn-large" target="_blank">
+              🌐 View Your App
+            </a>
+          </div>
+
+          <div class="navigation-buttons">
+            <button class="btn btn-secondary" onclick="navigateTo('f')">← Challenge F</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/challenge.js"></script>
+</body>
+</html>

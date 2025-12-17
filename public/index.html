@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dog Breeds Library</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header>
+    <h1>🐕 Dog Breeds Library</h1>
+    <p class="subtitle">Discover information about different dog breeds</p>
+  </header>
+
+  <main>
+    <!-- Random Dog Fact Section -->
+    <section id="fact-section" class="fact-card">
+      <h2>🎲 Random Dog Fact</h2>
+      <p id="dog-fact" class="fact-text">Loading...</p>
+      <button id="new-fact-btn" class="btn">Get New Fact</button>
+    </section>
+
+    <!-- Breeds Table Section -->
+    <section id="breeds-section">
+      <h2>📋 Dog Breeds</h2>
+
+      <!-- Loading State -->
+      <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p>Loading breeds...</p>
+      </div>
+
+      <!-- Error State -->
+      <div id="error" class="error hidden">
+        <p>❌ <span id="error-message">Something went wrong</span></p>
+        <button id="retry-btn" class="btn">Retry</button>
+      </div>
+
+      <!-- Breeds Table -->
+      <table id="breeds-table" class="hidden">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Life Span</th>
+            <th>Hypoallergenic</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="breeds-tbody">
+          <!--
+            TODO: Rows will be dynamically inserted here by main.js
+            Each row should contain:
+            - Breed name
+            - Life span (min-max years)
+            - Hypoallergenic status (Yes/No)
+            - "View Details" link to breed.html?id=BREED_ID
+          -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p>Data provided by <a href="https://dogapi.dog" target="_blank">Dog API</a></p>
+  </footer>
+
+  <!--
+    TODO: The main.js script needs to:
+    1. Fetch breeds from /api/breeds on page load
+    2. Render them in the table
+    3. Handle loading and error states
+    4. Fetch and display a random dog fact
+    5. Add click handler for "Get New Fact" button
+  -->
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Breed Details - Dog Breeds Library</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header>
+    <h1>🐕 Dog Breeds Library</h1>
+    <a href="/" class="back-link">← Back to All Breeds</a>
+  </header>
+
+  <main>
+    <!-- Loading State -->
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <p>Loading breed details...</p>
+    </div>
+
+    <!-- Error State -->
+    <div id="error" class="error hidden">
+      <p>❌ <span id="error-message">Something went wrong</span></p>
+      <a href="/" class="btn">Back to Home</a>
+    </div>
+
+    <!-- Breed Details Card -->
+    <article id="breed-details" class="breed-card hidden">
+      <h2 id="breed-name">Breed Name</h2>
+
+      <div class="breed-info">
+        <div class="info-item">
+          <span class="label">Description</span>
+          <p id="breed-description">-</p>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="label">Life Span</span>
+            <p id="breed-lifespan">-</p>
+          </div>
+
+          <div class="info-item">
+            <span class="label">Hypoallergenic</span>
+            <p id="breed-hypoallergenic">-</p>
+          </div>
+
+          <div class="info-item">
+            <span class="label">Male Weight</span>
+            <p id="breed-male-weight">-</p>
+          </div>
+
+          <div class="info-item">
+            <span class="label">Female Weight</span>
+            <p id="breed-female-weight">-</p>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p>Data provided by <a href="https://dogapi.dog" target="_blank">Dog API</a></p>
+  </footer>
+
+  <!--
+    TODO: The breed.js script needs to:
+    1. Get the breed ID from the URL query params (?id=xxx)
+    2. Validate the breed ID using validateBreedId()
+    3. Fetch the breed details from /api/breeds/:id
+    4. Render the breed information
+    5. Handle loading and error states
+  -->
+  <script type="module" src="/js/breed.js"></script>
+</body>
+</html>
