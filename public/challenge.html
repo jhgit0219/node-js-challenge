@@ -131,9 +131,10 @@
           <div class="intro-card">
             <h3>📁 Project Structure</h3>
             <pre class="code-block">src/
-├── classes/DogBreed.js    ← Challenge A & B
+├── classes/DogBreed.js    ← Challenge A
 ├── services/dogService.js ← Challenge E
 ├── utils/
+│   ├── formatters.js      ← Challenge B (CREATE THIS!)
 │   ├── wait.js            ← Challenge C & D
 │   └── validators.js      ← Challenge F
 server.js                  ← Challenge G
@@ -233,41 +234,68 @@ console.log(breed.isHypoallergenic()); // "No"</pre>
       <section class="challenge-section" id="section-b">
         <div class="section-header">
           <h2>Challenge B - Modules</h2>
-          <span class="badge">All src/ files</span>
+          <span class="badge">CREATE: src/utils/formatters.js</span>
         </div>
         <div class="section-content">
           <div class="objective-card">
             <h3>🎯 Objective</h3>
-            <p>Ensure proper ES Module structure with correct exports and imports throughout the project.</p>
+            <p>Create a <strong>new module from scratch</strong>: <code>src/utils/formatters.js</code> with formatting utility functions.</p>
           </div>
 
           <div class="task-card">
             <h3>📋 Requirements</h3>
 
-            <h4>File Structure</h4>
+            <h4>1. Create the file</h4>
+            <p>Create a new file: <code>src/utils/formatters.js</code></p>
+
+            <h4>2. Export these functions (named exports)</h4>
             <ul>
-              <li><code>src/classes/DogBreed.js</code> - default export</li>
-              <li><code>src/services/dogService.js</code> - named exports</li>
-              <li><code>src/utils/wait.js</code> - named exports</li>
-              <li><code>src/utils/validators.js</code> - named exports</li>
-              <li><code>src/index.js</code> - re-exports everything</li>
+              <li><code>formatLifeSpan(life)</code> - formats life span object</li>
+              <li><code>formatWeight(weight)</code> - formats weight object</li>
+              <li><code>formatHypoallergenic(value)</code> - formats boolean</li>
+            </ul>
+          </div>
+
+          <div class="task-card">
+            <h3>📋 Function Specifications</h3>
+
+            <h4><code>formatLifeSpan(life)</code></h4>
+            <ul>
+              <li>Input: <code>{ min: 10, max: 14 }</code> or <code>null/undefined</code></li>
+              <li>Output: <code>"10-14 years"</code> or <code>"N/A"</code></li>
             </ul>
 
-            <h4>Export Examples</h4>
-            <pre class="code-block">// Default export (classes)
-export default DogBreed;
+            <h4><code>formatWeight(weight)</code></h4>
+            <ul>
+              <li>Input: <code>{ min: 25, max: 35 }</code> or <code>null/undefined</code></li>
+              <li>Output: <code>"25-35 kg"</code> or <code>"N/A"</code></li>
+            </ul>
 
-// Named exports (functions)
-export function fetchBreeds() { ... }
-export { fetchBreeds, fetchBreedById };</pre>
+            <h4><code>formatHypoallergenic(value)</code></h4>
+            <ul>
+              <li>Input: <code>true</code> or <code>false</code></li>
+              <li>Output: <code>"Yes"</code> or <code>"No"</code></li>
+            </ul>
+          </div>
+
+          <div class="example-card">
+            <h3>📝 Example Implementation</h3>
+            <pre class="code-block">// src/utils/formatters.js
+
+export function formatLifeSpan(life) {
+  if (!life) return 'N/A';
+  return `${life.min}-${life.max} years`;
+}
+
+// Add the other functions...</pre>
           </div>
 
           <div class="hint-card">
             <h3>💡 Hints</h3>
             <ul>
-              <li>Use <code>export default</code> for classes</li>
-              <li>Use <code>export function</code> or <code>export { name }</code> for functions</li>
-              <li>The tests check that exports exist and are the correct type</li>
+              <li>Use <code>export function</code> for named exports</li>
+              <li>Handle <code>null</code> and <code>undefined</code> inputs</li>
+              <li>Use template literals for string formatting</li>
             </ul>
           </div>
 

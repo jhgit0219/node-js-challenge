@@ -8,6 +8,7 @@
  * They require an internet connection to pass.
  */
 
+import { jest, describe, test, expect, beforeAll } from '@jest/globals';
 import {
   fetchBreeds,
   fetchBreedById,

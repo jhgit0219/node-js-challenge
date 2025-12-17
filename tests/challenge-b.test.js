@@ -1,10 +1,13 @@
 /**
  * Challenge B - Modules
  *
- * Tests for proper module structure and exports.
+ * Tests for creating a new module from scratch.
  * Run with: npm run test:b
+ *
+ * YOU MUST CREATE: src/utils/formatters.js
  */
 
+import { describe, test, expect } from '@jest/globals';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -13,139 +16,85 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.join(__dirname, '..');
 
-describe('Challenge B - Module Structure', () => {
-  describe('File Structure', () => {
-    test('src/classes/DogBreed.js should exist', () => {
-      const filePath = path.join(rootDir, 'src', 'classes', 'DogBreed.js');
-      expect(fs.existsSync(filePath)).toBe(true);
-    });
-
-    test('src/services/dogService.js should exist', () => {
-      const filePath = path.join(rootDir, 'src', 'services', 'dogService.js');
-      expect(fs.existsSync(filePath)).toBe(true);
-    });
-
-    test('src/utils/wait.js should exist', () => {
-      const filePath = path.join(rootDir, 'src', 'utils', 'wait.js');
-      expect(fs.existsSync(filePath)).toBe(true);
-    });
-
-    test('src/utils/validators.js should exist', () => {
-      const filePath = path.join(rootDir, 'src', 'utils', 'validators.js');
-      expect(fs.existsSync(filePath)).toBe(true);
-    });
-
-    test('src/index.js should exist', () => {
-      const filePath = path.join(rootDir, 'src', 'index.js');
+describe('Challenge B - Create formatters.js Module', () => {
+  describe('Part 1: File Creation', () => {
+    test('src/utils/formatters.js should exist (YOU MUST CREATE THIS FILE)', () => {
+      const filePath = path.join(rootDir, 'src', 'utils', 'formatters.js');
       expect(fs.existsSync(filePath)).toBe(true);
     });
   });
 
-  describe('DogBreed Module Exports', () => {
-    test('should export DogBreed as default export', async () => {
-      const module = await import('../src/classes/DogBreed.js');
-      expect(module.default).toBeDefined();
-      expect(typeof module.default).toBe('function');
+  describe('Part 2: Export formatLifeSpan', () => {
+    test('should export formatLifeSpan as a named export', async () => {
+      const module = await import('../src/utils/formatters.js');
+      expect(module.formatLifeSpan).toBeDefined();
+      expect(typeof module.formatLifeSpan).toBe('function');
     });
 
-    test('DogBreed should be a class (constructor function)', async () => {
-      const { default: DogBreed } = await import('../src/classes/DogBreed.js');
-
-      // Test that it can be instantiated
-      const instance = new DogBreed({
-        id: 'test',
-        name: 'Test Breed',
-        description: 'Test',
-        hypoallergenic: false,
-        life: { min: 10, max: 12 },
-        maleWeight: { min: 20, max: 30 },
-        femaleWeight: { min: 15, max: 25 }
-      });
-
-      expect(instance).toBeInstanceOf(DogBreed);
-    });
-  });
-
-  describe('dogService Module Exports', () => {
-    test('should export fetchBreeds function', async () => {
-      const module = await import('../src/services/dogService.js');
-      expect(module.fetchBreeds).toBeDefined();
-      expect(typeof module.fetchBreeds).toBe('function');
+    test('formatLifeSpan({ min: 10, max: 14 }) should return "10-14 years"', async () => {
+      const { formatLifeSpan } = await import('../src/utils/formatters.js');
+      expect(formatLifeSpan({ min: 10, max: 14 })).toBe('10-14 years');
     });
 
-    test('should export fetchBreedById function', async () => {
-      const module = await import('../src/services/dogService.js');
-      expect(module.fetchBreedById).toBeDefined();
-      expect(typeof module.fetchBreedById).toBe('function');
+    test('formatLifeSpan({ min: 8, max: 12 }) should return "8-12 years"', async () => {
+      const { formatLifeSpan } = await import('../src/utils/formatters.js');
+      expect(formatLifeSpan({ min: 8, max: 12 })).toBe('8-12 years');
     });
 
-    test('should export fetchFacts function', async () => {
-      const module = await import('../src/services/dogService.js');
-      expect(module.fetchFacts).toBeDefined();
-      expect(typeof module.fetchFacts).toBe('function');
+    test('formatLifeSpan(null) should return "N/A"', async () => {
+      const { formatLifeSpan } = await import('../src/utils/formatters.js');
+      expect(formatLifeSpan(null)).toBe('N/A');
     });
 
-    test('should export API_BASE_URL constant', async () => {
-      const module = await import('../src/services/dogService.js');
-      expect(module.API_BASE_URL).toBeDefined();
-      expect(typeof module.API_BASE_URL).toBe('string');
-      expect(module.API_BASE_URL).toContain('dogapi.dog');
+    test('formatLifeSpan(undefined) should return "N/A"', async () => {
+      const { formatLifeSpan } = await import('../src/utils/formatters.js');
+      expect(formatLifeSpan(undefined)).toBe('N/A');
     });
   });
 
-  describe('wait Module Exports', () => {
-    test('should export wait function', async () => {
-      const module = await import('../src/utils/wait.js');
-      expect(module.wait).toBeDefined();
-      expect(typeof module.wait).toBe('function');
+  describe('Part 3: Export formatWeight', () => {
+    test('should export formatWeight as a named export', async () => {
+      const module = await import('../src/utils/formatters.js');
+      expect(module.formatWeight).toBeDefined();
+      expect(typeof module.formatWeight).toBe('function');
     });
 
-    test('should export delayedAction function', async () => {
-      const module = await import('../src/utils/wait.js');
-      expect(module.delayedAction).toBeDefined();
-      expect(typeof module.delayedAction).toBe('function');
-    });
-  });
-
-  describe('validators Module Exports', () => {
-    test('should export validateBreedId function', async () => {
-      const module = await import('../src/utils/validators.js');
-      expect(module.validateBreedId).toBeDefined();
-      expect(typeof module.validateBreedId).toBe('function');
+    test('formatWeight({ min: 25, max: 35 }) should return "25-35 kg"', async () => {
+      const { formatWeight } = await import('../src/utils/formatters.js');
+      expect(formatWeight({ min: 25, max: 35 })).toBe('25-35 kg');
     });
 
-    test('should export validateLimit function', async () => {
-      const module = await import('../src/utils/validators.js');
-      expect(module.validateLimit).toBeDefined();
-      expect(typeof module.validateLimit).toBe('function');
+    test('formatWeight({ min: 10, max: 20 }) should return "10-20 kg"', async () => {
+      const { formatWeight } = await import('../src/utils/formatters.js');
+      expect(formatWeight({ min: 10, max: 20 })).toBe('10-20 kg');
     });
 
-    test('should export safeExecute function', async () => {
-      const module = await import('../src/utils/validators.js');
-      expect(module.safeExecute).toBeDefined();
-      expect(typeof module.safeExecute).toBe('function');
+    test('formatWeight(null) should return "N/A"', async () => {
+      const { formatWeight } = await import('../src/utils/formatters.js');
+      expect(formatWeight(null)).toBe('N/A');
+    });
+
+    test('formatWeight(undefined) should return "N/A"', async () => {
+      const { formatWeight } = await import('../src/utils/formatters.js');
+      expect(formatWeight(undefined)).toBe('N/A');
     });
   });
 
-  describe('Main Index Exports', () => {
-    test('should re-export DogBreed', async () => {
-      const module = await import('../src/index.js');
-      expect(module.DogBreed).toBeDefined();
+  describe('Part 4: Export formatHypoallergenic', () => {
+    test('should export formatHypoallergenic as a named export', async () => {
+      const module = await import('../src/utils/formatters.js');
+      expect(module.formatHypoallergenic).toBeDefined();
+      expect(typeof module.formatHypoallergenic).toBe('function');
     });
 
-    test('should re-export service functions', async () => {
-      const module = await import('../src/index.js');
-      expect(module.fetchBreeds).toBeDefined();
-      expect(module.fetchBreedById).toBeDefined();
-      expect(module.fetchFacts).toBeDefined();
+    test('formatHypoallergenic(true) should return "Yes"', async () => {
+      const { formatHypoallergenic } = await import('../src/utils/formatters.js');
+      expect(formatHypoallergenic(true)).toBe('Yes');
     });
 
-    test('should re-export utility functions', async () => {
-      const module = await import('../src/index.js');
-      expect(module.wait).toBeDefined();
-      expect(module.delayedAction).toBeDefined();
-      expect(module.validateBreedId).toBeDefined();
-      expect(module.validateLimit).toBeDefined();
+    test('formatHypoallergenic(false) should return "No"', async () => {
+      const { formatHypoallergenic } = await import('../src/utils/formatters.js');
+      expect(formatHypoallergenic(false)).toBe('No');
     });
   });
 });

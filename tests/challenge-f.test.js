@@ -5,6 +5,7 @@
  * Run with: npm run test:f
  */
 
+import { jest, describe, test, expect } from '@jest/globals';
 import {
   validateBreedId,
   validateLimit,

@@ -10,6 +10,7 @@
  * - Async/await patterns throughout
  */
 
+import { jest, describe, test, expect } from '@jest/globals';
 import DogBreed from '../src/classes/DogBreed.js';
 import { fetchBreeds, fetchBreedById, fetchFacts } from '../src/services/dogService.js';
 import { wait } from '../src/utils/wait.js';

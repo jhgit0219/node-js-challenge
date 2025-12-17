@@ -5,6 +5,7 @@
  * Run with: npm run test:c
  */
 
+import { describe, test, expect } from '@jest/globals';
 import { wait } from '../src/utils/wait.js';
 
 describe('Challenge C - Promises (wait function)', () => {

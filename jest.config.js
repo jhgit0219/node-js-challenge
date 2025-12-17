@@ -4,6 +4,7 @@ export default {
   moduleFileExtensions: ['js', 'mjs'],
   testMatch: ['**/tests/**/*.test.js'],
   verbose: true,
+  injectGlobals: false,
   collectCoverageFrom: [
     'src/**/*.js',
     '!src/index.js'

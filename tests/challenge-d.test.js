@@ -5,6 +5,7 @@
  * Run with: npm run test:d
  */
 
+import { jest, describe, test, expect, beforeEach, afterEach } from '@jest/globals';
 import { delayedAction, retryWithDelay } from '../src/utils/wait.js';
 
 describe('Challenge D - Async/Await (delayedAction function)', () => {

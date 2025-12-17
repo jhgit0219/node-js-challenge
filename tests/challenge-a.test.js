@@ -5,6 +5,7 @@
  * Run with: npm run test:a
  */
 
+import { describe, test, expect } from '@jest/globals';
 import DogBreed from '../src/classes/DogBreed.js';
 
 describe('Challenge A - DogBreed Class', () => {
