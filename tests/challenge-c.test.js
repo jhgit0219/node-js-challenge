@@ -5,17 +5,16 @@
  * Run with: npm run test:c
  */
 
-import { describe, test, expect } from '@jest/globals';
-import { wait } from '../src/utils/wait.js';
+import { wait } from "../src/utils/wait.js";
 
-describe('Challenge C - Promises (wait function)', () => {
-  describe('Basic Functionality', () => {
-    test('wait should return a Promise', () => {
+describe("Challenge C - Promises (wait function)", () => {
+  describe("Basic Functionality", () => {
+    test("wait should return a Promise", () => {
       const result = wait(10);
       expect(result).toBeInstanceOf(Promise);
     });
 
-    test('wait should resolve after specified milliseconds', async () => {
+    test("wait should resolve after specified milliseconds", async () => {
       const start = Date.now();
       await wait(100);
       const elapsed = Date.now() - start;
@@ -25,7 +24,7 @@ describe('Challenge C - Promises (wait function)', () => {
       expect(elapsed).toBeLessThan(150);
     });
 
-    test('wait(0) should resolve almost immediately', async () => {
+    test("wait(0) should resolve almost immediately", async () => {
       const start = Date.now();
       await wait(0);
       const elapsed = Date.now() - start;
@@ -34,12 +33,12 @@ describe('Challenge C - Promises (wait function)', () => {
     });
   });
 
-  describe('Promise Behavior', () => {
-    test('wait should resolve (not reject) under normal conditions', async () => {
+  describe("Promise Behavior", () => {
+    test("wait should resolve (not reject) under normal conditions", async () => {
       await expect(wait(10)).resolves.not.toThrow();
     });
 
-    test('wait should work with .then() syntax', (done) => {
+    test("wait should work with .then() syntax", (done) => {
       const start = Date.now();
 
       wait(50).then(() => {
@@ -49,7 +48,7 @@ describe('Challenge C - Promises (wait function)', () => {
       });
     });
 
-    test('multiple wait calls should be independent', async () => {
+    test("multiple wait calls should be independent", async () => {
       const start = Date.now();
 
       // Run two waits in parallel
@@ -62,8 +61,8 @@ describe('Challenge C - Promises (wait function)', () => {
     });
   });
 
-  describe('Sequential Waits', () => {
-    test('sequential waits should add up', async () => {
+  describe("Sequential Waits", () => {
+    test("sequential waits should add up", async () => {
       const start = Date.now();
 
       await wait(50);
@@ -76,8 +75,8 @@ describe('Challenge C - Promises (wait function)', () => {
     });
   });
 
-  describe('Edge Cases', () => {
-    test('wait should handle small values', async () => {
+  describe("Edge Cases", () => {
+    test("wait should handle small values", async () => {
       const start = Date.now();
       await wait(1);
       const elapsed = Date.now() - start;
@@ -85,7 +84,7 @@ describe('Challenge C - Promises (wait function)', () => {
       expect(elapsed).toBeGreaterThanOrEqual(0);
     });
 
-    test('wait should resolve with undefined', async () => {
+    test("wait should resolve with undefined", async () => {
       const result = await wait(10);
       expect(result).toBeUndefined();
     });
